@@ -98,7 +98,7 @@ List* get_adj_nodes(Node* n)
 {
     List* lista = createList();
     if (n == NULL) return lista;
-    if (is_final(n)) return lista;
+    //if (is_final(n)) return lista;
 
     int i, j, k;
     for (i = 0 ; i < 9 ; i++)
