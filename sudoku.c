@@ -55,38 +55,47 @@ Para marcar los números que vayan apareciendo en una fila/columna/submatriz pue
 */
 int is_valid(Node* n)
 {
-    int filas[10], colu[10], sub[10];
-
     int i, j, k, l;
-    for (i = 0 ; i < 9 ; i++)
+
+    // Revisar filas y columnas
+    for (i = 0; i < 9; i++)
     {
-        for (j = 0 ; j < 9 ; j++)
+        int filas[10] = {0};
+        int colu[10] = {0};
+        for (j = 0; j < 9; j++)
         {
-            filas[j] = 0;
-            colu[j] = 0;
-            sub[j] = 0;
-        }
-
-        for (j = 0 ; j < 0 ; j++)
-        {
-            if (n->sudo[i][j] != 0)
+            int num_fila = n->sudo[i][j];
+            int num_colu = n->sudo[j][i];
+            if (num_fila != 0)
             {
-                if (filas[n->sudo[i][j]] == 1) return 0;
-                filas[n->sudo[i][j]] = 1;
+                if (filas[num_fila]) return 0;
+                filas[num_fila] = 1;
             }
-            if (n->sudo[j][i] != 0)
+            if (num_colu != 0)
             {
-                if (colu[n->sudo[j][i]] == 1) return 0;
-                colu[n->sudo[j][i]] = 1;
+                if (colu[num_colu]) return 0;
+                colu[num_colu] = 1;
             }
         }
+    }
 
-        for (k = 0 ; k < 3 ; k++)
+    // Revisar submatrices 3x3
+    for (i = 0; i < 3; i++)
+    {
+        for (j = 0; j < 3; j++)
         {
-            for (l = 0 ; l < 3 ; l++)
+            int sub[10] = {0};
+            for (k = 0; k < 3; k++)
             {
-                if (sub[n->sudo[k + i / 3 * 3][l + i % 3 * 3]] == 1) return 0;
-                sub[n->sudo[k + i / 3 * 3][l + i % 3 * 3]] = 1;
+                for (l = 0; l < 3; l++)
+                {
+                    int num = n->sudo[i*3 + k][j*3 + l];
+                    if (num != 0)
+                    {
+                        if (sub[num]) return 0;
+                        sub[num] = 1;
+                    }
+                }
             }
         }
     }
