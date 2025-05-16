@@ -29,3 +29,18 @@ Fri, May 16, 2025  7:33:15 PM:
  tests:  2|4
 total_score: 15/70
 5a7ad99
+Fri, May 16, 2025  7:47:46 PM: 
+ sudoku.c | 49 +++++++++++++++++++++++++++++++++++++++++++++++--
+ 1 file changed, 47 insertions(+), 2 deletions(-)
+Compilation failed
+In file included from test.c:5:0:
+sudoku.c: In function 'is_valid':
+sudoku.c:58:20: error: variable 'colu' set but not used [-Werror=unused-but-set-variable]
+     int filas[10], colu[10], sub[10];
+                    ^~~~
+sudoku.c: In function 'get_adj_nodes':
+sudoku.c:101:9: error: implicit declaration of function 'is_final' [-Werror=implicit-function-declaration]
+     if (is_final(n)) return lista;
+         ^~~~~~~~
+cc1.exe: all warnings being treated as errors
+9d34495
