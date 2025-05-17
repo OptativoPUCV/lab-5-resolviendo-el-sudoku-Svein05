@@ -133,17 +133,18 @@ Node* DFS(Node* initial, int* cont)
         pop(pila);
         if (is_final(nodo)) return nodo;
 
-        List *nodos_ady = get_adj_nodes(initial);
+        List *nodos_ady = get_adj_nodes(nodo);
         
         Node* nodo_lista = first(nodos_ady);
         while (nodo_lista != NULL)
         {
             push(pila, nodo_lista);
+            nodo_lista = next(nodos_ady);
         }
 
         free(nodo);
 
-        cont++;
+        (*cont)++;
         nodo = top(pila);
     }
 
