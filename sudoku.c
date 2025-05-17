@@ -47,7 +47,6 @@ int is_valid(Node* n)
 {
     int i, j, k, l;
 
-    // Revisar filas y columnas
     for (i = 0 ; i < 9 ; i++)
     {
         int filas[10] = {0};
@@ -69,21 +68,23 @@ int is_valid(Node* n)
         }
     }
 
-    for (i = 0 ; i < 3 ; i++)
-        for (j = 0 ; j < 3 ; j++)
+    for (int k = 0; k < 9; k++) 
+    {
+        int sub[10] = {0};
+        for (int p = 0; p < 9; p++) 
         {
-            int sub[10] = {0};
-            for (k = 0 ; k < 3 ; k++)
-                for (l = 0 ; l < 3 ; l++)
-                {
-                    int num = n->sudo[i * 3 + k][j * 3 + l];
-                    if (num != 0)
-                    {
-                        if (sub[num]) return 0;
-                        sub[num] = 1;
-                    }
-                }
+            int i = 3 * (k / 3) + (p / 3);
+            int j = 3 * (k % 3) + (p % 3);
+            int num = n->sudo[i][j];
+            
+            if (num != 0) 
+            {
+                if (sub[num]) return 0;
+                sub[num] = 1;
+            }
         }
+    }
+        
     return 1;
 }
 
@@ -110,9 +111,6 @@ List* get_adj_nodes(Node* n)
     return lista;
 }
 
-/*
-4.Implemente la función int is_final(Node * n). Esta función retorna 1 si el nodo corresponde a un nodo final (es decir, todos los valores de la matriz son distintos a 0) y 0 en caso contrario.
-*/
 int is_final(Node* n)
 {
     int i, j;
